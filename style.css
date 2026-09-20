@@ -1,0 +1,132 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation; /* 优化触控相应速度 */
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 防止滑动 */
+}
+
+/* 游戏整体容器：自适应手机屏幕，保持 FC 原版 512:448 的比例 */
+.game-wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    max-width: calc(100vh * (512 / 448)); /* 保证高度充满时宽度不超标 */
+    max-height: calc(100vw * (448 / 512)); /* 保证宽度充满时高度不超标 */
+    aspect-ratio: 512 / 448;
+    background-color: #5c94fc; /* FC 经典天空蓝 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* HUD 顶部栏 */
+.hud {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    font-size: clamp(10px, 2.5vw, 16px);
+    color: #fff;
+    text-shadow: 2px 2px #000;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* 画布完全自适应容器 */
+#marioCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated; /* 强制像素清晰不模糊 */
+}
+
+/* 手机端虚拟控制按键浮层 */
+.touch-controls {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    width: 100%;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 20;
+    pointer-events: none; /* 穿透不遮挡画面 */
+}
+
+.dpad, .actions {
+    display: flex;
+    gap: 12px;
+    pointer-events: auto;
+}
+
+.t-btn {
+    width: 54px;
+    height: 54px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    outline: none;
+}
+
+.t-btn:active {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0.95);
+}
+
+.action-btn {
+    background: rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.8);
+}
+
+.action-btn.jump {
+    background: rgba(34, 197, 94, 0.4);
+    border-color: rgba(34, 197, 94, 0.8);
+    transform: translateY(-12px); /* 跳跃键错开微调，更符合人体工学 */
+}
+
+/* 移动端横屏提示（如果是竖屏时，友情提醒） */
+@media screen and (orientation: portrait) {
+    body::before {
+        content: "📱 请旋转手机解锁【横屏】以获得最佳体验";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.92);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+        font-size: 18px;
+        text-align: center;
+        padding: 20px;
+    }
+}
