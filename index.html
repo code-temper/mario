@@ -2,14 +2,12 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 禁用手机缩放与双击放大 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>超级玛丽 - 手机横屏版</title>
+    <title>超级玛丽 - 经典FC网页版</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-wrapper">
-        <!-- 经典HUD顶部状态栏 -->
         <div class="hud">
             <div>MARIO<br><span id="score">000000</span></div>
             <div>🪙<br>x<span id="coins">00</span></div>
@@ -17,17 +15,14 @@
             <div>TIME<br><span id="time">400</span></div>
         </div>
 
-        <!-- 游戏画布 -->
         <canvas id="marioCanvas" width="512" height="448"></canvas>
 
-        <!-- 手机端虚拟触控面板 -->
+        <!-- 触控层优化：降低遮挡感 -->
         <div class="touch-controls">
-            <!-- 左侧方向键 -->
             <div class="dpad">
                 <button id="btn-left" class="t-btn">◀</button>
                 <button id="btn-right" class="t-btn">▶</button>
             </div>
-            <!-- 右侧动作键 -->
             <div class="actions">
                 <button id="btn-run" class="t-btn action-btn">B</button>
                 <button id="btn-jump" class="t-btn action-btn jump">A</button>
